@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    deploy:
+      replicas: 2  # Nombre d'instances backend
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "256M"
+    ports:
+      - "5252"  # Interne, pas exposé à l'hôte
+
+  frontend:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend

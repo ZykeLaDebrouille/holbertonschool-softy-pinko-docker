@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Softy Pinko</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Bienvenue sur Softy Pinko Frontend</h1>
+    <h2>Créer par Enes</h2>
+    <h3 id="dynamic-content">Chargement des données...</h3>
+
+    <script>
+        // Appel AJAX vers le backend
+        $(function() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:5252/api/hello", // URL de l'API backend
+                success: function(data) {
+                    $('#dynamic-content').text(data); // Affiche la réponse dans l'élément avec l'id 'dynamic-content'
+                },
+                error: function() {
+                    $('#dynamic-content').text("Erreur de chargement des données.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
